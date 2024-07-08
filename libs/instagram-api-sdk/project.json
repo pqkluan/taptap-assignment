@@ -1,0 +1,9 @@
+{
+	"name": "instagram-api-sdk",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/instagram-api-sdk/src",
+	"projectType": "library",
+	"tags": [],
+	"// targets": "to see all targets run: nx show project instagram-api-sdk --web",
+	"targets": {}
+}

@@ -1,5 +1,7 @@
-import { FC } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { FC, useEffect, useState } from 'react';
+import { Button, Image, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+
+import { instagramApi, PostItem } from '@libs/instagram-api-sdk';
 
 import { ScreenProps } from '@mobile/navigation/types/ScreenProps';
 
@@ -14,23 +16,37 @@ export const FeedsScreen: FC<Props> = (props) => {
 
 	const username = params?.username ?? DEFAULT_USERNAME;
 
+	const [posts, setPosts] = useState<PostItem[]>([]);
+
+	useEffect(() => {
+		async function fetchData() {
+			const result = await instagramApi.getUserPosts({ username_or_id_or_url: username });
+			setPosts(result.data.items);
+		}
+
+		fetchData();
+	}, [username]);
+
 	return (
-		<View style={styles.container}>
+		<ScrollView style={styles.container}>
 			<Text>{`Feeds screen of ${username}`}</Text>
 
 			<Button title='Search' onPress={() => navigation.navigate('SearchScreen')} />
-			<Button
-				title='Open post info'
-				onPress={() => navigation.navigate('PostInfoScreen', { code: 'post-test-code' })}
-			/>
-		</View>
+
+			{posts.map((post) => (
+				<TouchableOpacity
+					key={post.code}
+					onPress={() => navigation.navigate('PostInfoScreen', { code: post.code })}>
+					<Image source={{ uri: post.thumbnail_url }} style={{ width: '100%', aspectRatio: 1 }} />
+					<Text>{`${post.like_count} likes`}</Text>
+					{!!post.caption.user && <Text>{post.caption.user.username}</Text>}
+					<Text>{post.caption.text}</Text>
+				</TouchableOpacity>
+			))}
+		</ScrollView>
 	);
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
+	container: {},
 });

@@ -1,3 +1,5 @@
+import './setup';
+
 import React, { FC } from 'react';
 
 import { NavigationProvider } from '@mobile/navigation/NavigationProvider';

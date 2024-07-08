@@ -15,7 +15,8 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
-			"@mobile/*": ["./apps/mobile/src/*"]
+			"@mobile/*": ["./apps/mobile/src/*"],
+			"@libs/instagram-api-sdk": ["libs/instagram-api-sdk/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
