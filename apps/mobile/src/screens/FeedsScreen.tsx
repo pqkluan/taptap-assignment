@@ -13,17 +13,15 @@ import { useQueryUserPosts } from '@libs/instagram-api-sdk';
 
 import { ScreenProps } from '@mobile/navigation/types/ScreenProps';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { env } from '@mobile/services/env';
 
 type Props = ScreenProps<'FeedsScreen'>;
-
-// FIXME: move to env file
-const DEFAULT_USERNAME = 'instagram';
 
 export const FeedsScreen: FC<Props> = (props) => {
 	const { route, navigation } = props;
 	const { params } = route;
 
-	const username = params?.username ?? DEFAULT_USERNAME;
+	const username = params?.username ?? env.DEFAULT_USERNAME;
 
 	const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useQueryUserPosts({
 		username_or_id_or_url: username,
