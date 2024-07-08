@@ -1,9 +1,9 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { ScreenProps } from '@mobile/navigation/types/ScreenProps';
 import { useDidMount } from '@mobile/hooks/useDidMount';
-import { instagramApi, PostInfo } from '@libs/instagram-api-sdk';
+import { PostInfo, useQueryPostInfo } from '@libs/instagram-api-sdk';
 
 type Props = ScreenProps<'PostInfoScreen'>;
 
@@ -11,20 +11,13 @@ export const PostInfoScreen: FC<Props> = (props) => {
 	const { route, navigation } = props;
 	const { params } = route;
 
-	const [postInfo, setPostInfo] = useState<PostInfo | null>(null);
+	const { data } = useQueryPostInfo({ code_or_id_or_url: params.code });
+	const postInfo = data;
 
 	useDidMount(() => {
-		async function fetchData() {
-			const result = await instagramApi.getPostInfo({ code_or_id_or_url: params.code });
-			setPostInfo(result.data);
-		}
-
-		if (typeof params?.code !== 'undefined') {
-			fetchData();
-		} else {
+		if (typeof params?.code === 'undefined')
 			// Missing important data, pop by default
 			navigation.goBack();
-		}
 	});
 
 	return (

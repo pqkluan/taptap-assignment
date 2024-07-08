@@ -2,31 +2,36 @@
  * Configuration for the API
  */
 class ApiConfig {
-	private _apiKey?: string;
-	private _apiHost?: string;
+	/**
+	 * The host name of the API. We don't need to change this very often.
+	 */
+	public readonly HOST_NAME = 'https://instagram-scraper-api2.p.rapidapi.com';
 
-	public setApiKey(apiKey: string) {
-		this._apiKey = apiKey;
+	private _rapidApiKey?: string;
+	private _rapidApiHost?: string;
+
+	public setRapidApiKey(apiKey: string) {
+		this._rapidApiKey = apiKey;
 		return this;
 	}
 
-	public setApiHost(apiHost: string) {
-		this._apiHost = apiHost;
+	public setRapidApiHost(apiHost: string) {
+		this._rapidApiHost = apiHost;
 		return this;
 	}
 
-	get apiKey(): string | undefined {
-		return this._apiKey;
+	get rapidApiKey(): string | undefined {
+		return this._rapidApiKey;
 	}
 
-	get apiHost(): string | undefined {
-		return this._apiHost;
+	get rapidApiHost(): string | undefined {
+		return this._rapidApiHost;
 	}
 
 	get headers() {
-		if (!this.apiKey) throw new Error('API key is not set');
-		if (!this.apiHost) throw new Error('API host is not set');
-		return { 'x-rapidapi-host': this.apiHost, 'x-rapidapi-key': this.apiKey };
+		if (!this.rapidApiKey) throw new Error('API key is not set');
+		if (!this.rapidApiHost) throw new Error('API host is not set');
+		return { 'x-rapidapi-host': this.rapidApiHost, 'x-rapidapi-key': this.rapidApiKey };
 	}
 }
 

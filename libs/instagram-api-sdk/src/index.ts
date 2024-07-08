@@ -1,4 +1,5 @@
 export * from './types';
+export * from './hooks';
 
-export { instagramApi } from './instagram-api';
-export { apiConfig } from './api-config';
+export { api as instagramApi } from './api';
+export { apiConfig as instagramApiConfig } from './api-config';
