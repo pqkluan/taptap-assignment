@@ -2,11 +2,11 @@ import { useDeferredValue } from 'react';
 import { UndefinedInitialDataOptions, useQuery } from '@tanstack/react-query';
 
 import { api } from '../api';
-import { SearchResponse } from '../types';
+import { SearchItem } from '../types';
 import { queryKeys } from '../query-key-factory';
 
 type Params = Omit<
-	UndefinedInitialDataOptions<SearchResponse['data'], Error, SearchResponse['data'], string[]>,
+	UndefinedInitialDataOptions<SearchItem[], Error, SearchItem[], string[]>,
 	'queryKey' | 'queryFn'
 > & {
 	searchString: string;
@@ -22,7 +22,13 @@ export const useSearchUser = (params: Params) => {
 		queryKey: queryKeys.search(deferredSearchString),
 		queryFn: async () => {
 			const result = await api.searchUser({ search_query: deferredSearchString });
-			return result.data;
+			// This will help to reduce the data size stored in the cache
+			return result.data.items.map(({ full_name, is_verified, profile_pic_url, username }) => ({
+				full_name,
+				is_verified,
+				profile_pic_url,
+				username,
+			}));
 		},
 		enabled: !!deferredSearchString,
 		...otherConfig,

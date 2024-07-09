@@ -18,6 +18,7 @@
 		"react-native-screens": "*",
 		"react-native-svg-transformer": "*",
 		"react-native-svg": "*",
+		"react-native-unistyles": "*",
 		"react-native": "*",
 		"react": "*"
 	},

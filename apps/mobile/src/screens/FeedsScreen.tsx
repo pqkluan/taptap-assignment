@@ -4,16 +4,18 @@ import {
 	Button,
 	Image,
 	ScrollView,
-	StyleSheet,
 	Text,
 	TouchableOpacity,
+	View,
 } from 'react-native';
 
 import { useQueryUserPosts } from '@libs/instagram-api-sdk';
 
+import { ScreenWrap } from '@mobile/components/ScreenWrap';
+import { SearchBar } from '@mobile/components/SearchBar';
 import { ScreenProps } from '@mobile/navigation/types/ScreenProps';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { env } from '@mobile/services/env';
+import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 type Props = ScreenProps<'FeedsScreen'>;
 
@@ -23,16 +25,26 @@ export const FeedsScreen: FC<Props> = (props) => {
 
 	const username = params?.username ?? env.DEFAULT_USERNAME;
 
+	const { styles } = useStyles(stylesheet);
+
 	const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useQueryUserPosts({
 		username_or_id_or_url: username,
 	});
 
+	const decoySearchBar = (
+		<TouchableOpacity onPress={() => navigation.navigate('SearchScreen')}>
+			<View pointerEvents={'none'}>
+				<SearchBar containerStyle={styles.searchBar} />
+			</View>
+		</TouchableOpacity>
+	);
+
 	return (
-		<SafeAreaView style={styles.safeArea} edges={['bottom']}>
+		<ScreenWrap>
+			{decoySearchBar}
+
 			<ScrollView>
 				<Text>{`Feeds screen of ${username}`}</Text>
-
-				<Button title='Search' onPress={() => navigation.navigate('SearchScreen')} />
 
 				{data.map((post) => (
 					<TouchableOpacity
@@ -51,12 +63,12 @@ export const FeedsScreen: FC<Props> = (props) => {
 					!!hasNextPage && <Button title='Load more' onPress={() => fetchNextPage()} />
 				)}
 			</ScrollView>
-		</SafeAreaView>
+		</ScreenWrap>
 	);
 };
 
-const styles = StyleSheet.create({
-	safeArea: {
-		flex: 1,
+const stylesheet = createStyleSheet((theme) => ({
+	searchBar: {
+		marginTop: theme.margins.md,
 	},
-});
+}));

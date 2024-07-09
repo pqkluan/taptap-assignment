@@ -1,9 +1,10 @@
 import { FC } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 
-import { ScreenProps } from '@mobile/navigation/types/ScreenProps';
-import { useDidMount } from '@mobile/hooks/useDidMount';
 import { PostInfo, useQueryPostInfo } from '@libs/instagram-api-sdk';
+import { ScreenWrap } from '@mobile/components/ScreenWrap';
+import { useDidMount } from '@mobile/hooks/useDidMount';
+import { ScreenProps } from '@mobile/navigation/types/ScreenProps';
 
 type Props = ScreenProps<'PostInfoScreen'>;
 
@@ -21,10 +22,10 @@ export const PostInfoScreen: FC<Props> = (props) => {
 	});
 
 	return (
-		<View style={styles.container}>
+		<ScreenWrap>
 			<Text>{`Post info of ${route.params.code}`}</Text>
 			{!!postInfo && <PostInfoContent {...props} postInfo={postInfo} />}
-		</View>
+		</ScreenWrap>
 	);
 };
 
@@ -37,7 +38,3 @@ const PostInfoContent: FC<Props & { postInfo: PostInfo }> = (props) => {
 		</ScrollView>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {},
-});

@@ -14,12 +14,10 @@ import { RootStackParamList } from './types/RootStackParamList';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const stackScreenOptions: NativeStackNavigationOptions = {
-	headerTitleAlign: 'center',
+	headerShown: false,
 	animation: 'fade',
-	headerShadowVisible: true,
 	fullScreenGestureEnabled: true,
 	gestureEnabled: true,
-	headerBackTitleVisible: false,
 };
 
 export const RootStackNavigator: FC = () => {
