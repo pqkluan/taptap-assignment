@@ -5,7 +5,7 @@ import { useStyles } from 'react-native-unistyles';
 import { SearchItem } from '@libs/instagram-api-sdk';
 
 import { ListEmpty } from '@mobile/components/ListEmpty';
-import { ListError } from '@mobile/components/ListError';
+import { GenericError } from '@mobile/components/GenericError';
 import { ITEM_HEIGHT, SearchResultItem } from './SearchResultItem';
 
 type Props = {
@@ -35,7 +35,7 @@ export const SearchResultList: FC<Props> = (props) => {
 			data={data}
 			renderItem={renderItem}
 			getItemLayout={getItemLayout}
-			ListHeaderComponent={hasError ? ListError : undefined}
+			ListHeaderComponent={hasError ? GenericError : undefined}
 			ListEmptyComponent={fetched ? ListEmpty : undefined}
 			refreshControl={
 				<RefreshControl

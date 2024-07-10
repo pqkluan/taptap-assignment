@@ -1,10 +1,12 @@
 import { FC } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { RefreshControl, ScrollView } from 'react-native';
 
 import { PostInfo, useQueryPostInfo } from '@libs/instagram-api-sdk';
 import { ScreenWrap } from '@mobile/components/ScreenWrap';
 import { useDidMount } from '@mobile/hooks/useDidMount';
 import { ScreenProps } from '@mobile/navigation/types/ScreenProps';
+import { PostDetails } from '@mobile/components/PostDetails';
+import { GenericError } from '@mobile/components/GenericError';
 
 type Props = ScreenProps<'PostInfoScreen'>;
 
@@ -12,7 +14,9 @@ export const PostInfoScreen: FC<Props> = (props) => {
 	const { route, navigation } = props;
 	const { params } = route;
 
-	const { data } = useQueryPostInfo({ code_or_id_or_url: params.code });
+	const { data, refetch, isLoading, isError } = useQueryPostInfo({
+		code_or_id_or_url: params.code,
+	});
 	const postInfo = data;
 
 	useDidMount(() => {
@@ -23,8 +27,10 @@ export const PostInfoScreen: FC<Props> = (props) => {
 
 	return (
 		<ScreenWrap>
-			<Text>{`Post info of ${route.params.code}`}</Text>
-			{!!postInfo && <PostInfoContent {...props} postInfo={postInfo} />}
+			<ScrollView refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refetch} />}>
+				{isError && <GenericError />}
+				{!!postInfo && <PostInfoContent {...props} postInfo={postInfo} />}
+			</ScrollView>
 		</ScreenWrap>
 	);
 };
@@ -34,7 +40,11 @@ const PostInfoContent: FC<Props & { postInfo: PostInfo }> = (props) => {
 
 	return (
 		<ScrollView>
-			<Text>{JSON.stringify(postInfo, null, 2)}</Text>
+			<PostDetails
+				item={{ ...postInfo, like_count: postInfo.metrics.like_count }}
+				isFocused
+				captionCollapsed={false}
+			/>
 		</ScrollView>
 	);
 };

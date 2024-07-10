@@ -12,7 +12,7 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import { UserPost } from '@libs/instagram-api-sdk';
 
-import { ListError } from '@mobile/components/ListError';
+import { GenericError } from '@mobile/components/GenericError';
 import { ListEmpty } from '@mobile/components/ListEmpty';
 
 import { PostItem } from './PostItem';
@@ -74,7 +74,7 @@ export const PostList: FC<Props> = (props) => {
 			keyExtractor={keyExtractor}
 			data={data}
 			renderItem={renderItem}
-			ListHeaderComponent={hasError ? ListError : undefined}
+			ListHeaderComponent={hasError ? GenericError : undefined}
 			ListEmptyComponent={fetched ? ListEmpty : undefined}
 			ListFooterComponent={data.length > 0 ? <Footer hasMore={hasNextPage} /> : undefined}
 			onEndReached={onEndReached}

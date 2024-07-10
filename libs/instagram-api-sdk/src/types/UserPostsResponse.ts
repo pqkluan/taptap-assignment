@@ -23,11 +23,6 @@ export type UserPostMedia = {
 	| {
 			is_video: true;
 			video_url: string;
-			video_versions: {
-				height: number;
-				width: number;
-				url: string;
-			}[];
 	  }
 );
 
@@ -39,14 +34,14 @@ export type UserPost = {
 	original_height: number;
 	original_width: number;
 
-	caption: {
-		text: string;
-		user: {
-			profile_pic_url: string;
-			username: string;
-			is_verified: boolean;
-		};
+	user: {
+		profile_pic_url: string;
+		username: string;
+		full_name: string;
+		is_verified: boolean;
 	};
+
+	caption: { text: string };
 } & (
 	| {
 			product_type: 'carousel_container';
@@ -56,11 +51,6 @@ export type UserPost = {
 	| {
 			product_type: 'clips';
 			video_url: string;
-			video_versions: {
-				height: number;
-				width: number;
-				url: string;
-			}[];
 	  }
 );
 

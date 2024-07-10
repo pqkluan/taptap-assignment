@@ -5,9 +5,9 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { Text } from '@mobile/components/Text';
 
 /**
- * Generic component to display a message when a list has an error
+ * Generic component to display an error message
  */
-export const ListError: FC = () => {
+export const GenericError: FC = () => {
 	const { styles, theme } = useStyles(stylesheet);
 
 	return (
