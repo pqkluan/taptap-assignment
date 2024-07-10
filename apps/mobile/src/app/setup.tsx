@@ -6,9 +6,6 @@ import { env } from '@mobile/services/env';
 import { breakpoints } from '@mobile/themes/breakpoints';
 import { darkTheme, lightTheme } from '@mobile/themes';
 
-// Configure the Instagram API SDK
-instagramApiConfig.setRapidApiHost(env.RAPID_API_HOST).setRapidApiKey(env.RAPID_API_KEY);
-
 // Configure app theme
 UnistylesRegistry.addBreakpoints(breakpoints)
 	.addThemes({ light: lightTheme, dark: darkTheme })
@@ -21,3 +18,6 @@ UnistylesRegistry.addBreakpoints(breakpoints)
 			adaptiveThemes: true,
 		},
 	);
+
+// Configure the Instagram API SDK
+instagramApiConfig.setRapidApiHost(env.RAPID_API_HOST).setRapidApiKey(env.RAPID_API_KEY);
