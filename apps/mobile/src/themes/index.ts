@@ -10,6 +10,7 @@ export const lightTheme = {
 
 		typography: colors.black,
 		typographySecondary: colors.darkGray,
+		error: colors.red,
 		border: colors.darkGray,
 	},
 	margins: {
@@ -28,6 +29,7 @@ export const darkTheme = {
 		background: colors.black,
 		typography: colors.whiteSmoke,
 		typographySecondary: colors.darkGray,
+		error: colors.red,
 		border: colors.darkGray,
 	},
 	margins: {

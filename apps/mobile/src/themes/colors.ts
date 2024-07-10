@@ -5,4 +5,5 @@ export const colors = {
 	darkGray: '#A8A8A8',
 	transparent: 'transparent',
 	verifiedBlue: '#0095F6',
+	red: '#F02849',
 } as const;

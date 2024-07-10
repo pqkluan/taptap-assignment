@@ -6,6 +6,7 @@ interface Props extends TextProps {
 	color?: TextStyle['color'];
 	size?: TextStyle['fontSize'];
 	weight?: TextStyle['fontWeight'];
+	textAlign?: TextStyle['textAlign'];
 }
 
 export const Text: FC<Props> = (props) => {
@@ -15,17 +16,18 @@ export const Text: FC<Props> = (props) => {
 		color,
 		size: fontSize = 14,
 		weight: fontWeight = '400',
+		textAlign = 'left',
 		...textProps
 	} = props;
 
 	const { styles } = useStyles(stylesheet);
 
 	const combinedStyle = useMemo(() => {
-		const tempStyle: TextStyle = { fontWeight, fontSize };
+		const tempStyle: TextStyle = { fontWeight, fontSize, textAlign };
 		if (color) tempStyle.color = color;
 
 		return [styles.text, tempStyle, propStyle];
-	}, [color, fontSize, fontWeight, propStyle, styles.text]);
+	}, [color, fontSize, fontWeight, propStyle, styles.text, textAlign]);
 
 	return (
 		<RNText style={combinedStyle} {...textProps}>
@@ -38,5 +40,6 @@ const stylesheet = createStyleSheet((theme) => ({
 	text: {
 		color: theme.colors.typography,
 		fontFamily: theme.fontFamily,
+		// FIXME: use variant
 	},
 }));

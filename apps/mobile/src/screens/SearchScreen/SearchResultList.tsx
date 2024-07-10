@@ -4,19 +4,23 @@ import { useStyles } from 'react-native-unistyles';
 
 import { SearchItem } from '@libs/instagram-api-sdk';
 
+import { ListEmpty } from '@mobile/components/ListEmpty';
+import { ListError } from '@mobile/components/ListError';
 import { ITEM_HEIGHT, SearchResultItem } from './SearchResultItem';
 
 type Props = {
-	refreshing: boolean;
-	onRefresh: () => void;
 	data?: SearchItem[];
+	fetched: boolean;
+	refreshing: boolean;
+	hasError: boolean;
+	onRefresh: () => void;
 	onItemPress: (username: string) => void;
 };
 
 const defaultData: SearchItem[] = [];
 
 export const SearchResultList: FC<Props> = (props) => {
-	const { data = defaultData, refreshing, onRefresh, onItemPress } = props;
+	const { data = defaultData, fetched, refreshing, hasError, onRefresh, onItemPress } = props;
 
 	const { theme } = useStyles();
 
@@ -31,6 +35,8 @@ export const SearchResultList: FC<Props> = (props) => {
 			data={data}
 			renderItem={renderItem}
 			getItemLayout={getItemLayout}
+			ListHeaderComponent={hasError ? ListError : undefined}
+			ListEmptyComponent={fetched ? ListEmpty : undefined}
 			refreshControl={
 				<RefreshControl
 					refreshing={refreshing}

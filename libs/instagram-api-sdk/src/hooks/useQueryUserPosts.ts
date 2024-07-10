@@ -5,7 +5,7 @@ import {
 } from '@tanstack/react-query';
 
 import { api } from '../api';
-import { PostItem, UserPostsResponse } from '../types';
+import { UserPost, UserPostsResponse } from '../types';
 import { queryKeys } from '../query-key-factory';
 import { useMemo } from 'react';
 
@@ -37,10 +37,13 @@ export const useQueryUserPosts = (params: Params) => {
 		...otherConfig,
 	});
 
-	const posts = useMemo<PostItem[]>(
+	const posts = useMemo<UserPost[]>(
 		() => data?.pages.flatMap((page) => page.data.items) ?? [],
 		[data],
 	);
 
-	return { ...others, data: posts };
+	return {
+		...others,
+		data: posts,
+	};
 };

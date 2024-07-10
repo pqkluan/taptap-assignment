@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import { SearchItem } from '@libs/instagram-api-sdk';
 
 import { Text } from '@mobile/components/Text';
-import VerifiedIcon from '@mobile/assets/icons/verified.svg';
-import { colors } from '@mobile/themes/colors';
+import { UserAvatar, AVATAR_SIZE } from '@mobile/components/UserAvatar';
+import { Username } from '@mobile/components/Username';
 
 type Props = {
 	item: SearchItem;
@@ -21,23 +21,23 @@ export const SearchResultItem: FC<Props> = (props) => {
 
 	return (
 		<TouchableOpacity style={styles.container} onPress={() => onPress(username)}>
-			<Image source={{ uri: profile_pic_url }} style={styles.avatar} resizeMethod='resize' />
+			{!!profile_pic_url && <UserAvatar uri={profile_pic_url} />}
 
-			<View>
-				<View style={styles.usernameRow}>
-					<Text weight={'bold'}>{item.username}</Text>
-					{!!is_verified && <VerifiedIcon height={12} width={12} color={colors.verifiedBlue} />}
-				</View>
+			<View style={styles.subContainer}>
+				<Username username={username} verified={is_verified} />
 
-				{!!full_name && <Text color={theme.colors.typographySecondary}>{full_name}</Text>}
+				{!!full_name && (
+					<Text color={theme.colors.typographySecondary} numberOfLines={1}>
+						{full_name}
+					</Text>
+				)}
 			</View>
 		</TouchableOpacity>
 	);
 };
 
 // Note: we could figure out the row height by looking at the avatar height + vertical padding
-// It's is 44 + 2 * 16 = 76
-export const ITEM_HEIGHT = 76;
+export const ITEM_HEIGHT = AVATAR_SIZE + 16 * 2;
 
 const stylesheet = createStyleSheet((theme) => ({
 	container: {
@@ -49,17 +49,7 @@ const stylesheet = createStyleSheet((theme) => ({
 
 		gap: theme.margins.lg,
 	},
-	avatar: {
-		height: 44,
-		width: 44,
-		borderRadius: 22,
-		borderWidth: StyleSheet.hairlineWidth,
-		borderColor: theme.colors.border,
-	},
-	usernameRow: {
-		flexDirection: 'row',
-		alignItems: 'center',
-
-		gap: theme.margins.sm,
+	subContainer: {
+		flex: 1,
 	},
 }));

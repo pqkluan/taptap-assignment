@@ -18,7 +18,7 @@ export const SearchScreen: FC<Props> = (props) => {
 
 	const [searchString, setSearchString] = useState('');
 
-	const { data, isFetching, refetch } = useSearchUser({ searchString });
+	const { data, isFetching, isFetched, isError, refetch } = useSearchUser({ searchString });
 
 	const handleSearchCancel = useCallback(() => {
 		navigation.pop();
@@ -48,6 +48,8 @@ export const SearchScreen: FC<Props> = (props) => {
 
 			<SearchResultList
 				data={data}
+				hasError={isError}
+				fetched={isFetched}
 				refreshing={isFetching}
 				onRefresh={handleRefresh}
 				onItemPress={handleItemPress}

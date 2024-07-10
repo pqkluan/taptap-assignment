@@ -45,6 +45,7 @@ export const SearchBar = forwardRef<TextInput, Props>((props, ref) => {
 					autoComplete={'off'}
 					autoCorrect={false}
 					blurOnSubmit
+					clearButtonMode={'always'}
 					clearTextOnFocus={false}
 					contextMenuHidden
 					cursorColor={theme.colors.typography}
