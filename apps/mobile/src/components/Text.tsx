@@ -40,6 +40,5 @@ const stylesheet = createStyleSheet((theme) => ({
 	text: {
 		color: theme.colors.typography,
 		fontFamily: theme.fontFamily,
-		// FIXME: use variant
 	},
 }));

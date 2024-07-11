@@ -19,6 +19,7 @@ export const ExpandableText: FC<Props> = (props) => {
 	const text = useMemo(() => nonTrimmedText.trim(), [nonTrimmedText]);
 
 	const cutOffIndex = useMemo<number>(() => {
+		// TODO: extract this logic to a helper function and test it
 		// Early return if the text is already short
 		if (text.length <= cutOffLength) return text.length;
 
