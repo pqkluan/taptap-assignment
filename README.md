@@ -8,6 +8,12 @@ https://www.youtube.com/playlist?list=PLJuF39fteJJudyASicnkESSTUSJnqFmX0
 
 ## How to run the project
 
+This monorepo is created and managed by Nx. To run the project, you need to have Nx installed globally.
+
+```
+npm add --global nx@latest
+```
+
 Assuming you already have React Native development environment setup, follow the steps below to run the project.
 
 Install the dependencies by running `yarn` at the root of the project.
@@ -21,6 +27,7 @@ RAPID_API_KEY=3ffebdxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 Note: the `RAPID_API_KEY` is a placeholder, you need to replace it with your own key.
+
 You could get the key by subscribing to the [Instagram Scraper API](https://rapidapi.com/social-api1-instagram/api/instagram-scraper-api2/playground).
 
 ### iOS
@@ -54,4 +61,5 @@ iOS build requires a paid Apple Developer account so it won't be available for t
 #### Android
 
 First, run `yarn nx run mobile-e2e:build:android.emu.release` to build the Android app.
+
 Then run `yarn nx run mobile-e2e:test:android.emu.release` to run the E2E test.
