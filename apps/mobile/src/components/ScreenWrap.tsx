@@ -5,6 +5,8 @@ import { SafeAreaView, Edge } from 'react-native-safe-area-context';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 type Props = PropsWithChildren<{
+	testID: string;
+
 	containerStyle?: StyleProp<ViewStyle>;
 
 	safeTop?: boolean;
@@ -15,6 +17,7 @@ type Props = PropsWithChildren<{
 
 export const ScreenWrap: FC<Props> = (props) => {
 	const {
+		testID,
 		containerStyle,
 		safeBottom = true,
 		safeLeft = true,
@@ -37,7 +40,7 @@ export const ScreenWrap: FC<Props> = (props) => {
 	}, [safeBottom, safeLeft, safeRight, safeTop]);
 
 	return (
-		<SafeAreaView style={styles.safeAreaView} edges={edges}>
+		<SafeAreaView testID={testID} style={styles.safeAreaView} edges={edges}>
 			<StatusBar barStyle={theme.statusBarStyle} backgroundColor={theme.colors.background} />
 			<View style={[styles.container, containerStyle]}>{children}</View>
 		</SafeAreaView>

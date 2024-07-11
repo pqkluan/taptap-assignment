@@ -29,6 +29,9 @@ export type PostInfo = {
 			product_type: 'clips';
 			video_url: string;
 	  }
+	| {
+			product_type: 'feed';
+	  }
 );
 
 export type PostInfoResponse = {

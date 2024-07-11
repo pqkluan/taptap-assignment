@@ -1,4 +1,3 @@
-// Replace "com.mobile" here and below with your app's package name from the top of MainActivity.java
 package com.mobile;
 
 import com.wix.detox.Detox;
@@ -15,7 +14,7 @@ import androidx.test.rule.ActivityTestRule;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class DetoxTest {
-    @Rule // (2)
+    @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class, false, false);
 
     @Test

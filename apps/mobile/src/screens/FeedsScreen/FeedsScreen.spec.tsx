@@ -46,6 +46,7 @@ describe('FeedsScreen', () => {
 
 		const view = render(<FeedsScreen navigation={navigation} route={route} />, { wrapper });
 
+		expect(view.getByTestId('feeds-screen')).toBeDefined();
 		expect(view.getByTestId('search-button')).toBeDefined();
 		expect(view.getByTestId('post-list')).toBeDefined();
 	});

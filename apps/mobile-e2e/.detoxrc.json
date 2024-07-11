@@ -41,7 +41,7 @@
 		"emulator": {
 			"type": "android.emulator",
 			"device": {
-				"avdName": "Pixel_4a_API_30"
+				"avdName": "Pixel_7a_API_33"
 			}
 		}
 	},
@@ -54,7 +54,6 @@
 			"device": "simulator",
 			"app": "ios.debug"
 		},
-
 		"android.emu.release": {
 			"device": "emulator",
 			"app": "android.release"

@@ -38,7 +38,7 @@ export const useQueryUserPosts = (params: Params) => {
 	});
 
 	const posts = useMemo<UserPost[]>(
-		() => data?.pages.flatMap((page) => page.data.items) ?? [],
+		() => data?.pages.flatMap((page) => page?.data?.items) ?? [],
 		[data],
 	);
 

@@ -14,19 +14,18 @@ export const PostInfoScreen: FC<Props> = (props) => {
 	const { route, navigation } = props;
 	const { params } = route;
 
-	const { data, refetch, isLoading, isError } = useQueryPostInfo({
+	const { data, refetch, isFetching, isError } = useQueryPostInfo({
 		code_or_id_or_url: params.code,
 	});
 
 	useDidMount(() => {
-		if (typeof params?.code === 'undefined')
-			// Missing important data, pop by default
-			navigation.goBack();
+		// Missing important data, pop by default
+		if (typeof params.code === 'undefined') navigation.goBack();
 	});
 
 	return (
-		<ScreenWrap>
-			<ScrollView refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refetch} />}>
+		<ScreenWrap testID='post-info-screen'>
+			<ScrollView refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}>
 				{isError && <GenericError />}
 				{!!data && (
 					<PostDetails

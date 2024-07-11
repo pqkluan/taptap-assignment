@@ -36,6 +36,14 @@ describe('PostInfoScreen', () => {
 		navigation.goBack.mockReset();
 	});
 
+	it('renders expected contents', () => {
+		jest.spyOn(SDK, 'useQueryPostInfo').mockReturnValue(defaultHookResult as HookResult);
+
+		const view = render(<PostInfoScreen navigation={navigation} route={route} />, { wrapper });
+
+		expect(view.getByTestId('post-info-screen')).toBeDefined();
+	});
+
 	it('should go back if post code is missing', () => {
 		jest.spyOn(SDK, 'useQueryPostInfo').mockReturnValue(defaultHookResult as HookResult);
 

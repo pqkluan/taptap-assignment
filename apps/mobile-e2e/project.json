@@ -5,5 +5,20 @@
 	"projectType": "application",
 	"tags": [],
 	"implicitDependencies": ["mobile"],
-	"targets": {}
+	"targets": {
+		"build": {
+			"configurations": {
+				"android.emu.release": {
+					"args": ["--configuration android.emu.release"]
+				}
+			}
+		},
+		"test": {
+			"configurations": {
+				"android.emu.release": {
+					"args": ["--configuration android.emu.release"]
+				}
+			}
+		}
+	}
 }

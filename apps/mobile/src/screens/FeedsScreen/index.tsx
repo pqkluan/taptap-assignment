@@ -43,7 +43,7 @@ export const FeedsScreen: FC<Props> = (props) => {
 	}, [navigation]);
 
 	return (
-		<ScreenWrap>
+		<ScreenWrap testID='feeds-screen'>
 			<TouchableOpacity testID='search-button' onPress={handleSearch}>
 				<View pointerEvents={'none'}>
 					<SearchBar containerStyle={styles.searchBar} />

@@ -36,7 +36,7 @@ export const SearchScreen: FC<Props> = (props) => {
 	}, [refetch]);
 
 	return (
-		<ScreenWrap>
+		<ScreenWrap testID='search-screen'>
 			<SearchBar
 				containerStyle={styles.searchBar}
 				value={searchString}

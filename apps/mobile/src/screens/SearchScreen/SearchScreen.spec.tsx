@@ -34,6 +34,7 @@ describe('SearchScreen', () => {
 
 		const view = render(<SearchScreen navigation={navigation} />, { wrapper });
 
+		expect(view.getByTestId('search-screen')).toBeDefined();
 		expect(view.getByTestId('search-input')).toBeDefined();
 		expect(view.getByTestId('search-result-list')).toBeDefined();
 	});

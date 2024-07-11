@@ -49,16 +49,24 @@ export const PostDetails: FC<Props> = (props) => {
 				/>
 			)}
 
-			<View style={styles.avatarWrap}>
-				{!!user.profile_pic_url && <UserAvatar uri={user.profile_pic_url} />}
-			</View>
+			{item.product_type !== 'feed' && (
+				<View style={styles.avatarWrap}>
+					{!!user.profile_pic_url && <UserAvatar uri={user.profile_pic_url} />}
+				</View>
+			)}
 
 			<View style={styles.subContainer}>
+				{item.product_type === 'feed' && <UserAvatar uri={user.profile_pic_url} />}
+
 				{!!like_count && <Text weight={'bold'}>{`${like_count.toLocaleString()} likes`}</Text>}
 
 				<Text>
 					<Username username={user.username} verified={user.is_verified} />{' '}
-					{captionCollapsed ? <ExpandableText text={caption.text} /> : caption.text}
+					{captionCollapsed && item.product_type !== 'feed' ? (
+						<ExpandableText text={caption.text} />
+					) : (
+						caption.text
+					)}
 				</Text>
 			</View>
 		</View>
@@ -72,6 +80,7 @@ const stylesheet = createStyleSheet((theme) => ({
 	subContainer: {
 		marginTop: theme.margins.xl,
 		paddingHorizontal: theme.margins.xl,
+		gap: theme.margins.md,
 	},
 	avatarWrap: {
 		position: 'absolute',

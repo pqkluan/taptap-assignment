@@ -38,6 +38,7 @@ export const SearchResultList: FC<Props> = (props) => {
 			getItemLayout={getItemLayout}
 			ListHeaderComponent={hasError ? GenericError : undefined}
 			ListEmptyComponent={fetched ? ListEmpty : undefined}
+			keyboardShouldPersistTaps={'always'}
 			refreshControl={
 				<RefreshControl
 					refreshing={refreshing}

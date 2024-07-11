@@ -52,6 +52,9 @@ export type UserPost = {
 			product_type: 'clips';
 			video_url: string;
 	  }
+	| {
+			product_type: 'feed';
+	  }
 );
 
 export type UserPostsResponse = {
