@@ -51,6 +51,7 @@ export const FeedsScreen: FC<Props> = (props) => {
 			</TouchableOpacity>
 
 			<PostList
+				username={username}
 				data={data}
 				hasError={isError}
 				fetched={isFetched}

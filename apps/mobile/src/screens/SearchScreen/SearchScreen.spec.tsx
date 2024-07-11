@@ -18,7 +18,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => {
 };
 
 describe('SearchScreen', () => {
-	const navigation = { pop: jest.fn(), navigate: jest.fn() };
+	const navigation = { pop: jest.fn(), replace: jest.fn() };
 
 	const mockRefetch = jest.fn();
 	const defaultHookResult: Partial<HookResult> = {
@@ -87,6 +87,6 @@ describe('SearchScreen', () => {
 
 		// Assert that clicking on a result navigates to the correct screen with the correct username
 		fireEvent.press(view.getByText('mr.beast'));
-		expect(navigation.navigate).toHaveBeenCalledWith('FeedsScreen', { username: 'mr.beast' });
+		expect(navigation.replace).toHaveBeenCalledWith('FeedsScreen', { username: 'mr.beast' });
 	});
 });

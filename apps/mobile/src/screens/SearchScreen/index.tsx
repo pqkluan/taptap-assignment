@@ -26,7 +26,7 @@ export const SearchScreen: FC<Props> = (props) => {
 
 	const handleItemPress = useCallback(
 		(username: string) => {
-			navigation.navigate('FeedsScreen', { username });
+			navigation.replace('FeedsScreen', { username });
 		},
 		[navigation],
 	);

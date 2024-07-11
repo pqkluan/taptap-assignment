@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import {
 	ActivityIndicator,
 	FlatList,
@@ -20,6 +20,7 @@ import { Text } from '@mobile/components/Text';
 import { useIsFocused } from '@react-navigation/native';
 
 type Props = {
+	username: string;
 	data?: UserPost[];
 	fetched: boolean;
 	refreshing: boolean;
@@ -35,6 +36,7 @@ const defaultData: UserPost[] = [];
 
 export const PostList: FC<Props> = (props) => {
 	const {
+		username,
 		data = defaultData,
 		fetched,
 		refreshing,
@@ -48,6 +50,7 @@ export const PostList: FC<Props> = (props) => {
 	const { theme } = useStyles();
 	const isScreenFocused = useIsFocused();
 
+	const ref = useRef<FlatList>(null);
 	const [viewableItemCodes, setViewableItemCodes] = useState<string[]>([]);
 
 	const handleViewableItemsChanged = useCallback(
@@ -69,9 +72,15 @@ export const PostList: FC<Props> = (props) => {
 		[onItemPress, isScreenFocused, viewableItemCodes],
 	);
 
+	useEffect(() => {
+		// Scroll to top when username changes
+		ref.current?.scrollToOffset({ animated: false, offset: 0 });
+	}, [username]);
+
 	return (
 		<FlatList
 			testID='post-list'
+			ref={ref}
 			keyExtractor={keyExtractor}
 			data={data}
 			renderItem={renderItem}
