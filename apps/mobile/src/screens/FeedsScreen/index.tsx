@@ -7,7 +7,6 @@ import { useQueryUserPosts } from '@libs/instagram-api-sdk';
 import { ScreenWrap } from '@mobile/components/ScreenWrap';
 import { SearchBar } from '@mobile/components/SearchBar';
 import { ScreenProps } from '@mobile/navigation/types/ScreenProps';
-import { env } from '@mobile/services/env';
 
 import { PostList } from './PostList';
 
@@ -15,9 +14,7 @@ type Props = ScreenProps<'FeedsScreen'>;
 
 export const FeedsScreen: FC<Props> = (props) => {
 	const { route, navigation } = props;
-	const { params } = route;
-
-	const username = params?.username ?? env.DEFAULT_USERNAME;
+	const username = route?.params?.username;
 
 	const { styles } = useStyles(stylesheet);
 
@@ -41,9 +38,13 @@ export const FeedsScreen: FC<Props> = (props) => {
 		fetchNextPage();
 	}, [fetchNextPage]);
 
+	const handleSearch = useCallback(() => {
+		navigation.navigate('SearchScreen');
+	}, [navigation]);
+
 	return (
 		<ScreenWrap>
-			<TouchableOpacity onPress={() => navigation.navigate('SearchScreen')}>
+			<TouchableOpacity testID='search-button' onPress={handleSearch}>
 				<View pointerEvents={'none'}>
 					<SearchBar containerStyle={styles.searchBar} />
 				</View>

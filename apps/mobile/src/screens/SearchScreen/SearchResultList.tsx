@@ -31,6 +31,7 @@ export const SearchResultList: FC<Props> = (props) => {
 
 	return (
 		<FlatList
+			testID={'search-result-list'}
 			keyExtractor={keyExtractor}
 			data={data}
 			renderItem={renderItem}

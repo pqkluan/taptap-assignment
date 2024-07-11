@@ -18,7 +18,12 @@ export const Username: FC<Props> = (props) => {
 			{!!verified && (
 				<>
 					{' '}
-					<VerifiedIcon height={12} width={12} color={colors.verifiedBlue} />
+					<VerifiedIcon
+						testID={'verified-icon'}
+						height={12}
+						width={12}
+						color={colors.verifiedBlue}
+					/>
 				</>
 			)}
 		</Text>

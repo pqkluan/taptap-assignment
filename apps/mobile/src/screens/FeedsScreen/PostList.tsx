@@ -71,6 +71,7 @@ export const PostList: FC<Props> = (props) => {
 
 	return (
 		<FlatList
+			testID='post-list'
 			keyExtractor={keyExtractor}
 			data={data}
 			renderItem={renderItem}

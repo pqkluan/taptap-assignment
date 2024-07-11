@@ -12,7 +12,7 @@ export const GenericError: FC = () => {
 
 	return (
 		<View style={styles.container}>
-			<Text color={theme.colors.error} textAlign='center'>
+			<Text testID='generic-error-text' color={theme.colors.error} textAlign='center'>
 				{'Something went wrong\nPlease try again later'}
 			</Text>
 		</View>

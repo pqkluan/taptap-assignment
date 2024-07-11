@@ -10,6 +10,7 @@ import { SearchScreen } from '@mobile/screens/SearchScreen';
 import { PostInfoScreen } from '@mobile/screens/PostInfoScreen';
 
 import { RootStackParamList } from './types/RootStackParamList';
+import { env } from '@mobile/services/env';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -23,7 +24,11 @@ const stackScreenOptions: NativeStackNavigationOptions = {
 export const RootStackNavigator: FC = () => {
 	return (
 		<Stack.Navigator screenOptions={stackScreenOptions}>
-			<Stack.Screen name='FeedsScreen' component={FeedsScreen} />
+			<Stack.Screen
+				name='FeedsScreen'
+				component={FeedsScreen}
+				initialParams={{ username: env.DEFAULT_USERNAME }}
+			/>
 			<Stack.Screen name='SearchScreen' component={SearchScreen} />
 			<Stack.Screen name='PostInfoScreen' component={PostInfoScreen} />
 		</Stack.Navigator>

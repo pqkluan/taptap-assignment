@@ -35,7 +35,7 @@ export const PostDetails: FC<Props> = (props) => {
 	const aspectRatio = original_height / original_width;
 
 	return (
-		<View style={styles.container}>
+		<View testID='post-details-container' style={styles.container}>
 			{item.product_type === 'carousel_container' && (
 				<MediaCarousel data={item.carousel_media} aspectRatio={aspectRatio} isFocused={isFocused} />
 			)}

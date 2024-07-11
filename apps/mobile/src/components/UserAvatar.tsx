@@ -14,6 +14,7 @@ export const UserAvatar: FC<Props> = (props) => {
 
 	return (
 		<FastImage
+			testID={'user-avatar'}
 			source={{ uri, priority: FastImage.priority.high }}
 			style={styles.avatar}
 			resizeMode={FastImage.resizeMode.cover}

@@ -38,6 +38,7 @@ export const SearchBar = forwardRef<TextInput, Props>((props, ref) => {
 				<SearchIcon width={12} height={12} color={theme.colors.border} />
 
 				<TextInput
+					testID='search-input'
 					ref={ref}
 					style={[styles.textInput, textInputStyle]}
 					allowFontScaling={false}
