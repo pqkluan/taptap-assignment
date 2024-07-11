@@ -1,5 +1,11 @@
 # TapTap Assignment
 
+## Demo videos
+
+You can find the demo videos for the assignment in the following playlist:
+
+https://www.youtube.com/playlist?list=PLJuF39fteJJudyASicnkESSTUSJnqFmX0
+
 ## How to run the project
 
 Assuming you already have React Native development environment setup, follow the steps below to run the project.
